@@ -1,0 +1,20 @@
+[project]
+name = "translate-server"
+version = "0.1.0"
+description = "Translation server using translategemma GGUF via llama-cpp-python"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.111",
+    "uvicorn[standard]>=0.29",
+    "llama-cpp-python>=0.2.77",
+    "huggingface-hub>=0.23",
+    "jinja2>=3.1",
+]
+
+# GPU-accelerated install (run ONE of these instead of plain `uv sync`):
+#
+#   CUDA (replace cu124 with your installed CUDA toolkit version):
+#     CMAKE_ARGS="-DGGML_CUDA=on" uv pip install llama-cpp-python --no-cache-dir
+#
+#   Apple Metal:
+#     CMAKE_ARGS="-DGGML_METAL=on" uv pip install llama-cpp-python --no-cache-dir

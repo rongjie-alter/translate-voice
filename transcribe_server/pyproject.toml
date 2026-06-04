@@ -1,0 +1,17 @@
+[project]
+name = "transcribe-server"
+version = "0.1.0"
+description = "Japanese speech transcription server using kotoba-whisper-v2.1"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.111",
+    "uvicorn[standard]>=0.29",
+    "transformers>=4.41",
+    "torch>=2.3",
+    "python-multipart>=0.0.9",
+    "soundfile>=0.12",
+    "librosa>=0.10",
+    "accelerate>=0.30",
+    "stable-ts==2.16.0",
+    "punctuators==0.0.5",
+]
