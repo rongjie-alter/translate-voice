@@ -212,7 +212,6 @@ Glossary:
 
 Produce only the {{ target_lang }} translation, without any additional explanations or commentary. Please translate the following {{ source_lang }} text into {{ target_lang }}:
 
-
 {{ text | trim }}<end_of_turn>
 <start_of_turn>model
 """)
@@ -239,18 +238,19 @@ def _render_prompt(
 # ── configuration ─────────────────────────────────────────────────────────────
 HOST = os.environ.get("TRANSLATE_HOST", "0.0.0.0")
 PORT = int(os.environ.get("TRANSLATE_PORT", "8002"))
-N_CTX = 2048
+N_CTX = int(os.environ.get("N_CTX", "2048"))
 N_GPU_LAYERS = int(os.environ.get("N_GPU_LAYERS", "-1"))
 N_THREADS = int(os.environ.get("N_THREADS", "8"))
 GPU_COUNT = int(os.environ.get("GPU_COUNT", "1"))
+QAT = os.environ.get("QAT", "Q8_0")
 
 # ── model selection ───────────────────────────────────────────────────────────
 if GPU_COUNT >= 2:
     _default_repo = "mradermacher/translategemma-27b-it-GGUF"
-    _default_file = "translategemma-27b-it.Q8_0.gguf"
+    _default_file = f"translategemma-27b-it.{QAT}.gguf"
 else:
     _default_repo = "mradermacher/translategemma-4b-it-GGUF"
-    _default_file = "translategemma-4b-it.Q8_0.gguf"
+    _default_file = f"translategemma-4b-it.{QAT}.gguf"
 
 REPO_ID = os.environ.get("TRANSLATE_MODEL_REPO", _default_repo)
 FILENAME = os.environ.get("TRANSLATE_MODEL_FILE", _default_file)
