@@ -11,10 +11,20 @@ dependencies = [
     "jinja2>=3.1",
 ]
 
-# GPU-accelerated install (run ONE of these instead of plain `uv sync`):
-#
-#   CUDA (replace cu124 with your installed CUDA toolkit version):
-#     CMAKE_ARGS="-DGGML_CUDA=on" uv pip install llama-cpp-python --no-cache-dir
-#
-#   Apple Metal:
-#     CMAKE_ARGS="-DGGML_METAL=on" uv pip install llama-cpp-python --no-cache-dir
+# 1. Define both extra indices
+[[tool.uv.index]]
+name = "llama-cpp-cuda"
+url = "https://abetlen.github.io/llama-cpp-python/whl/cu130"
+explicit = true
+
+[[tool.uv.index]]
+name = "llama-cpp-metal"
+url = "https://abetlen.github.io/llama-cpp-python/whl/metal"
+explicit = true
+
+# 2. Use environment markers to route the dependency conditionally
+[tool.uv.sources]
+llama-cpp-python = [
+    { index = "llama-cpp-metal", marker = "sys_platform == 'darwin'" },
+    { index = "llama-cpp-cuda", marker = "sys_platform != 'darwin'" },
+]
