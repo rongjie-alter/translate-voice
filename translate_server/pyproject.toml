@@ -14,7 +14,7 @@ dependencies = [
 # 1. Define both extra indices
 [[tool.uv.index]]
 name = "llama-cpp-cuda"
-url = "https://abetlen.github.io/llama-cpp-python/whl/cu130"
+url = "https://abetlen.github.io/llama-cpp-python/whl/cu1128"
 explicit = true
 
 [[tool.uv.index]]
